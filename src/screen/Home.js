@@ -34,6 +34,14 @@ const [ image, setImage ] = useState('')
     setImage('')
  }
 
+async function deleteTeam(id){
+    if(window.confirm('¿seguro que quieres eliminar?')){
+      const { data } = await axios.delete(baseURL+`/${id}`)
+      console.log(data)
+      getTeams()  
+    }
+}
+
  function updateTeam(){ }
 
 
@@ -79,9 +87,11 @@ const [ image, setImage ] = useState('')
               { listTeam.map(item => (
                  <div className="col-md-6" key={item.id}>
                         <Card 
+                           id={item.id}
                            name={item.name}
                            trophy={item.trophy} 
-                           image={item.image}  />
+                           image={item.image} 
+                           deleteTeam={deleteTeam} />
                 </div>
                   
                           
